@@ -8,11 +8,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Data
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PersonResponse {
+public class PersonDto {
     private Long personId;
     private String firstName;
     private String lastName;
@@ -22,5 +21,6 @@ public class PersonResponse {
     private String aboutMe;
     private String photo;
     private String linkedin;
-    private List<JobExperienceResponse> experiences = new ArrayList<>();
+    private List<JobExperienceDto> experiences = new ArrayList<>();
+
 }

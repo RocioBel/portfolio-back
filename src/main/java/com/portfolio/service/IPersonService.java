@@ -1,15 +1,14 @@
 package com.portfolio.service;
 
-import com.portfolio.dto.PersonRequest;
-import com.portfolio.dto.PersonResponse;
+import com.portfolio.dto.PersonDto;
 import com.portfolio.exception.EntityNotFoundException;
 
 import java.util.List;
 
 public interface IPersonService {
-    List<PersonResponse> getPeople();
-    PersonResponse savePerson(PersonRequest person);
+    List<PersonDto> getPeople();
+    PersonDto savePerson(PersonDto person);
     void deletePerson(Integer id);
-    PersonResponse getPerson(Integer id) throws EntityNotFoundException;
-    PersonResponse updatePerson(Integer id, PersonRequest person) throws EntityNotFoundException;
+    PersonDto getPerson(Integer id) throws EntityNotFoundException;
+    PersonDto updatePerson(Integer id, PersonDto person) throws EntityNotFoundException;
 }

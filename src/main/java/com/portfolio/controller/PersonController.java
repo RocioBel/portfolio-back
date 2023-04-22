@@ -1,7 +1,6 @@
 package com.portfolio.controller;
 
-import com.portfolio.dto.PersonRequest;
-import com.portfolio.dto.PersonResponse;
+import com.portfolio.dto.PersonDto;
 import com.portfolio.exception.EntityNotFoundException;
 import com.portfolio.service.IPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,34 +17,34 @@ public class PersonController {
     IPersonService personService;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<PersonResponse> getPerson(@PathVariable Integer id) throws EntityNotFoundException {
-        PersonResponse person = personService.getPerson(id);
+    public ResponseEntity<PersonDto> getPerson(@PathVariable Integer id) throws EntityNotFoundException {
+        PersonDto person = personService.getPerson(id);
         return ResponseEntity.ok(person);
     }
 
     @GetMapping
-    public ResponseEntity<List<PersonResponse>> getPeople(){
-        List<PersonResponse> people = personService.getPeople();
+    public ResponseEntity<List<PersonDto>> getPeople(){
+        List<PersonDto> people = personService.getPeople();
         return ResponseEntity.ok(people);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<PersonResponse> addPerson(@RequestBody PersonRequest person){
-        PersonResponse savedPerson = personService.savePerson(person);
+    public ResponseEntity<PersonDto> addPerson(@RequestBody PersonDto person){
+        PersonDto savedPerson = personService.savePerson(person);
         return new ResponseEntity<>(savedPerson, HttpStatus.CREATED);
 
     }
 
-    @DeleteMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePerson(@PathVariable Integer id){
         personService.deletePerson(id);
     }
 
-    @PostMapping("/{id}/modify")
-    public ResponseEntity<PersonResponse> modifyPerson(@RequestBody PersonRequest person, @PathVariable Integer id) throws EntityNotFoundException {
-        PersonResponse update = personService.updatePerson(id, person);
+    @PostMapping("/{id}")
+    public ResponseEntity<PersonDto> modifyPerson(@RequestBody PersonDto person, @PathVariable Integer id) throws EntityNotFoundException {
+        PersonDto update = personService.updatePerson(id, person);
         return ResponseEntity.ok(update);
     }
 
