@@ -1,9 +1,9 @@
 package com.portfolio.service;
 
-import com.portfolio.dto.JobExperienceRequest;
-import com.portfolio.dto.JobExperienceResponse;
-import com.portfolio.dto.PersonResponse;
+import com.portfolio.dto.JobExperienceDto;
+import com.portfolio.dto.PersonDto;
 import com.portfolio.exception.EntityNotFoundException;
+import com.portfolio.exception.InvalidRequestException;
 import com.portfolio.model.JobExperience;
 import com.portfolio.model.JobType;
 import com.portfolio.model.Person;
@@ -32,14 +32,14 @@ public class JobExperienceService implements  IJobExperienceService {
     ModelMapper mapper = new ModelMapper();
 
     @Override
-    public List<JobExperienceResponse> getExperiences(Integer id) throws EntityNotFoundException {
-        List<JobExperienceResponse> experiences = personService.getPerson(id).getExperiences();
-        return experiences.stream().map(e -> mapper.map(e, JobExperienceResponse.class)).collect(Collectors.toList());
+    public List<JobExperienceDto> getExperiences(Integer id) throws EntityNotFoundException {
+        List<JobExperienceDto> experiences = personService.getPerson(id).getExperiences();
+        return experiences.stream().map(e -> mapper.map(e, JobExperienceDto.class)).collect(Collectors.toList());
     }
 
     @Override
-    public JobExperienceResponse addExperience(Integer id, JobExperienceRequest workDto) throws EntityNotFoundException {
-        PersonResponse person = personService.getPerson(id);
+    public JobExperienceDto addExperience(Integer id, JobExperienceDto workDto) throws EntityNotFoundException {
+        PersonDto person = personService.getPerson(id);
         JobExperience work = mapper.map(workDto, JobExperience.class);
         Person mappedPerson = mapper.map(person, Person.class);
         work.setPerson(mappedPerson);
@@ -48,32 +48,37 @@ public class JobExperienceService implements  IJobExperienceService {
         work.setType(jobType);
 
         JobExperience savedWork = jobExperienceRepository.save(work);
-        return mapper.map(savedWork, JobExperienceResponse.class);
+        return mapper.map(savedWork, JobExperienceDto.class);
     }
 
     @Override
-    public JobExperienceResponse updateExperience(Integer id, Integer expId, JobExperienceRequest updatedJob) throws EntityNotFoundException {
+    public JobExperienceDto updateExperience(Integer id, Integer expId, JobExperienceDto updatedJob) throws EntityNotFoundException {
         personService.getPerson(id);
         getExperienceById(expId);
         JobExperience mapppedExperience = mapper.map(updatedJob, JobExperience.class);
         JobExperience savedExperience = jobExperienceRepository.save(mapppedExperience);
-        return mapper.map(savedExperience, JobExperienceResponse.class);
+        return mapper.map(savedExperience, JobExperienceDto.class);
     }
 
     @Override
-    public void deleteExperience(Integer id, Integer expId) throws EntityNotFoundException {
-        personService.getPerson(id);
-        getExperienceById(id);
-        jobExperienceRepository.deleteById(expId);
+    public void deleteExperience(Integer id, Integer expId) throws EntityNotFoundException, InvalidRequestException {
+        PersonDto person = personService.getPerson(id);
+        JobExperience experience = getExperienceById(expId);
+        if (!person.getExperiences().contains(experience)) {
+            throw new InvalidRequestException("The experience doesn't belong to the person");
+        }
+        person.getExperiences().remove(experience);
+        personService.savePerson(mapper.map(person, PersonDto.class));
+        jobExperienceRepository.deleteById(Integer.parseInt(experience.getExperienceId().toString()));
     }
 
 
-    private JobExperienceResponse getExperienceById(Integer id) throws EntityNotFoundException {
+    private JobExperience getExperienceById(Integer id) throws EntityNotFoundException {
         Optional<JobExperience> finded = jobExperienceRepository.findById(id);
         if(finded.isEmpty()){
             throw new EntityNotFoundException("Job experience with id " + id + " doesn't exist.");
         }
 
-        return mapper.map(finded.get(), JobExperienceResponse.class);
+        return finded.get();
     }
 }

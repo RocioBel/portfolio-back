@@ -1,14 +1,15 @@
 package com.portfolio.dto;
 
-import com.portfolio.model.JobType;
 import lombok.Data;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
 @Getter
 @Data
-public class JobExperienceResponse {
+@ToString
+public class JobExperienceDto {
     private Long experienceId;
     private String jobTitle;
     private String company;
@@ -16,5 +17,5 @@ public class JobExperienceResponse {
     private LocalDate startDate;
     private LocalDate endDate;
     private String description;
-    private JobType type;
+    private Integer typeId;
 }

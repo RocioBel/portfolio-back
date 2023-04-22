@@ -30,7 +30,7 @@ public class JobExperience {
     private LocalDate endDate;
     @Column(name = "descripcion")
     private String description;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "persona_id")
     @JsonBackReference
     private Person person;
