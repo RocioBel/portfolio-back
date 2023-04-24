@@ -1,4 +1,4 @@
-package com.portfolio.service;
+package com.portfolio.service.impl;
 
 import com.portfolio.dto.JobExperienceDto;
 import com.portfolio.dto.PersonDto;
@@ -9,6 +9,8 @@ import com.portfolio.model.JobType;
 import com.portfolio.model.Person;
 import com.portfolio.repository.IJobExperienceRepository;
 import com.portfolio.repository.IJobTypeRepository;
+import com.portfolio.service.IJobExperienceService;
+import com.portfolio.service.IPersonService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class JobExperienceService implements  IJobExperienceService {
+public class JobExperienceService implements IJobExperienceService {
 
     @Autowired
     IJobTypeRepository jobTypeRepository;
@@ -33,8 +35,7 @@ public class JobExperienceService implements  IJobExperienceService {
 
     @Override
     public List<JobExperienceDto> getExperiences(Integer id) throws EntityNotFoundException {
-        List<JobExperienceDto> experiences = personService.getPerson(id).getExperiences();
-        return experiences.stream().map(e -> mapper.map(e, JobExperienceDto.class)).collect(Collectors.toList());
+        return personService.getPerson(id).getExperiences();
     }
 
     @Override
@@ -54,8 +55,9 @@ public class JobExperienceService implements  IJobExperienceService {
     @Override
     public JobExperienceDto updateExperience(Integer id, Integer expId, JobExperienceDto updatedJob) throws EntityNotFoundException {
         personService.getPerson(id);
-        getExperienceById(expId);
+        JobExperience jobExperience = getExperienceById(expId);
         JobExperience mapppedExperience = mapper.map(updatedJob, JobExperience.class);
+        mapppedExperience.setPerson(jobExperience.getPerson());
         JobExperience savedExperience = jobExperienceRepository.save(mapppedExperience);
         return mapper.map(savedExperience, JobExperienceDto.class);
     }
@@ -63,13 +65,11 @@ public class JobExperienceService implements  IJobExperienceService {
     @Override
     public void deleteExperience(Integer id, Integer expId) throws EntityNotFoundException, InvalidRequestException {
         PersonDto person = personService.getPerson(id);
-        JobExperience experience = getExperienceById(expId);
-        if (!person.getExperiences().contains(experience)) {
+        boolean found = person.getExperiences().stream().anyMatch(e -> e.getExperienceId() == expId);
+        if (!found) {
             throw new InvalidRequestException("The experience doesn't belong to the person");
         }
-        person.getExperiences().remove(experience);
-        personService.savePerson(mapper.map(person, PersonDto.class));
-        jobExperienceRepository.deleteById(Integer.parseInt(experience.getExperienceId().toString()));
+        jobExperienceRepository.deleteExperience(expId);
     }
 
 

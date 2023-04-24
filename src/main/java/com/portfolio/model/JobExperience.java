@@ -17,7 +17,7 @@ public class JobExperience {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long experienceId;
+    private Integer experienceId;
     @Column(name = "puesto")
     private String jobTitle;
     @Column(name = "empresa")
@@ -30,7 +30,7 @@ public class JobExperience {
     private LocalDate endDate;
     @Column(name = "descripcion")
     private String description;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "persona_id")
     @JsonBackReference
     private Person person;

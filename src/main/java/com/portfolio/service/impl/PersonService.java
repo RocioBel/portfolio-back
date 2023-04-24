@@ -1,10 +1,11 @@
-package com.portfolio.service;
+package com.portfolio.service.impl;
 
 import com.portfolio.dto.PersonDto;
 import com.portfolio.exception.EntityNotFoundException;
 import com.portfolio.model.Person;
 import com.portfolio.repository.IJobExperienceRepository;
 import com.portfolio.repository.IPersonRepository;
+import com.portfolio.service.IPersonService;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class PersonService implements  IPersonService {
+public class PersonService implements IPersonService {
     @Autowired
     IPersonRepository personRepository;
 

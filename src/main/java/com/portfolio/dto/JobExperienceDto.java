@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Data
 @ToString
 public class JobExperienceDto {
-    private Long experienceId;
+    private Integer experienceId;
     private String jobTitle;
     private String company;
     private Boolean isActual;
