@@ -12,7 +12,7 @@ import java.util.List;
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PersonDto {
-    private Long personId;
+    private Integer personId;
     private String firstName;
     private String lastName;
     private LocalDate birthday;
@@ -23,5 +23,7 @@ public class PersonDto {
     private String linkedin;
     private List<JobExperienceDto> experiences = new ArrayList<>();
     private List<EducationDto> education = new ArrayList<>();
+    private List<ProjectDto> projects = new ArrayList<>();
+
 
 }
