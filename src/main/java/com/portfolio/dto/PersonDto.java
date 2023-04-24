@@ -22,5 +22,6 @@ public class PersonDto {
     private String photo;
     private String linkedin;
     private List<JobExperienceDto> experiences = new ArrayList<>();
+    private List<EducationDto> education = new ArrayList<>();
 
 }

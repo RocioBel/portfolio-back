@@ -19,7 +19,7 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long personId;
+    private Integer personId;
     @Column(name = "nombre")
     private String firstName;
     @Column(name = "apellido")
@@ -36,8 +36,11 @@ public class Person {
     private String photo;
     @Column(name= "url_linkedin")
     private String linkedin;
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL,  fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonManagedReference
     private List<JobExperience> experiences = new ArrayList<>();
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL,  fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Education> education = new ArrayList<>();
 
 }
