@@ -24,6 +24,8 @@ public class Person {
     private String firstName;
     @Column(name = "apellido")
     private String lastName;
+    @Column(name = "titulo")
+    private String title;
     @Column(name = "fecha_nacimiento")
     private LocalDate birthday;
     @Column(name = "telefono")
@@ -45,5 +47,11 @@ public class Person {
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL,  fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonManagedReference
     private List<Project> projects = new ArrayList<>();
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL,  fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Skill> skills = new ArrayList<>();
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL,  fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Language> languages = new ArrayList<>();
 
 }

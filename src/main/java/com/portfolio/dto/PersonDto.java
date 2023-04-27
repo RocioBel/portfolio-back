@@ -15,6 +15,7 @@ public class PersonDto {
     private Integer personId;
     private String firstName;
     private String lastName;
+    private String title;
     private LocalDate birthday;
     private String phone;
     private String email;
@@ -24,6 +25,7 @@ public class PersonDto {
     private List<JobExperienceDto> experiences = new ArrayList<>();
     private List<EducationDto> education = new ArrayList<>();
     private List<ProjectDto> projects = new ArrayList<>();
-
+    private List<SkillDto> skills = new ArrayList<>();
+    private List<LanguageDto> languages = new ArrayList<>();
 
 }
