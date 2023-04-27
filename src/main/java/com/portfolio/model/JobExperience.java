@@ -30,6 +30,8 @@ public class JobExperience {
     private LocalDate endDate;
     @Column(name = "descripcion")
     private String description;
+    @Column(name = "logo")
+    private String logo;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "persona_id")
     @JsonBackReference

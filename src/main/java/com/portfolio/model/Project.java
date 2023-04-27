@@ -9,7 +9,7 @@ import lombok.ToString;
 @Data
 @Entity
 @ToString
-@Table(name = "proyectos")
+@Table(name = "proyecto")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Project {
     @Id

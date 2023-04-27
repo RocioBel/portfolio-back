@@ -13,6 +13,7 @@ public class EducationDto {
     private Integer educationId;
     private String titleName;
     private String institute;
+    private String logo;
     private Boolean isActual;
     private LocalDate startDate;
     private LocalDate endDate;

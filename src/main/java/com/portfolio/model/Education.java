@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Data
 @Entity
 @ToString
-@Table(name = "estudios")
+@Table(name = "estudio")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Education {
     @Id
@@ -22,6 +22,8 @@ public class Education {
     private String titleName;
     @Column(name = "instituto")
     private String institute;
+    @Column(name = "logo")
+    private String logo;
     @Column(name = "es_actual")
     private Boolean isActual;
     @Column(name = "fecha_inicio")

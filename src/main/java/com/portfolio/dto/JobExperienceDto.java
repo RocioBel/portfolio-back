@@ -17,5 +17,6 @@ public class JobExperienceDto {
     private LocalDate startDate;
     private LocalDate endDate;
     private String description;
+    private String logo;
     private Integer typeId;
 }
