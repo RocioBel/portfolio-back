@@ -1,16 +1,12 @@
 package com.portfolio.service.impl;
 
-import com.portfolio.dto.LanguageDto;
-import com.portfolio.dto.PersonDto;
+import com.portfolio.dto.PersonResponseDto;
 import com.portfolio.dto.SkillDto;
 import com.portfolio.exception.EntityNotFoundException;
 import com.portfolio.exception.InvalidRequestException;
-import com.portfolio.model.Language;
 import com.portfolio.model.Person;
 import com.portfolio.model.Skill;
-import com.portfolio.repository.ILanguageRepository;
 import com.portfolio.repository.ISkillRepository;
-import com.portfolio.service.ILanguageService;
 import com.portfolio.service.IPersonService;
 import com.portfolio.service.ISkillService;
 import org.modelmapper.ModelMapper;
@@ -37,24 +33,28 @@ public class SkillService implements ISkillService {
     }
 
     @Override
-    public SkillDto addSkill(Integer id, SkillDto skillDto) throws EntityNotFoundException {
-        PersonDto personDto = personService.getPerson(id);
+    public PersonResponseDto addSkill(Integer id, SkillDto skillDto) throws EntityNotFoundException {
+        PersonResponseDto personResponseDto = personService.getPerson(id);
         Skill skill = mapper.map(skillDto, Skill.class);
-        Person person = mapper.map(personDto, Person.class);
+        Person person = mapper.map(personResponseDto, Person.class);
         skill.setPerson(person);
 
-        Skill savedSkill = skillRepository.save(skill);
-        return mapper.map(savedSkill, SkillDto.class);
+        skillRepository.save(skill);
+
+        PersonResponseDto updatedPerson = personService.getPerson(id);
+        return updatedPerson;
     }
 
     @Override
-    public SkillDto updateSkill(Integer id, Integer skillId, SkillDto skillDto) throws EntityNotFoundException {
+    public PersonResponseDto updateSkill(Integer id, Integer skillId, SkillDto skillDto) throws EntityNotFoundException {
         personService.getPerson(id);
         Skill skill = getSkillById(skillId);
         Skill mappedSkill = mapper.map(skillDto, Skill.class);
         mappedSkill.setPerson(skill.getPerson());
-        Skill savedSkill = skillRepository.save(mappedSkill);
-        return mapper.map(savedSkill, SkillDto.class);
+        skillRepository.save(mappedSkill);
+
+        PersonResponseDto updatedPerson = personService.getPerson(id);
+        return updatedPerson;
     }
 
     @Override

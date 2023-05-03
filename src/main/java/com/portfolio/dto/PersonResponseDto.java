@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PersonDto {
+public class PersonResponseDto {
     private Integer personId;
     private String firstName;
     private String lastName;

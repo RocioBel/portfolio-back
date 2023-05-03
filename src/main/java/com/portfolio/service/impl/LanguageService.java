@@ -1,7 +1,7 @@
 package com.portfolio.service.impl;
 
 import com.portfolio.dto.LanguageDto;
-import com.portfolio.dto.PersonDto;
+import com.portfolio.dto.PersonResponseDto;
 import com.portfolio.exception.EntityNotFoundException;
 import com.portfolio.exception.InvalidRequestException;
 import com.portfolio.model.Language;
@@ -33,24 +33,28 @@ public class LanguageService implements ILanguageService {
     }
 
     @Override
-    public LanguageDto addLanguage(Integer id, LanguageDto languageDto) throws EntityNotFoundException {
-        PersonDto personDto = personService.getPerson(id);
+    public PersonResponseDto addLanguage(Integer id, LanguageDto languageDto) throws EntityNotFoundException {
+        PersonResponseDto personResponseDto = personService.getPerson(id);
         Language language = mapper.map(languageDto, Language.class);
-        Person person = mapper.map(personDto, Person.class);
+        Person person = mapper.map(personResponseDto, Person.class);
         language.setPerson(person);
 
-        Language savedLanguage = languageRepository.save(language);
-        return mapper.map(savedLanguage, LanguageDto.class);
+        languageRepository.save(language);
+
+        PersonResponseDto updatedPerson = personService.getPerson(id);
+        return updatedPerson;
     }
 
     @Override
-    public LanguageDto updateLanguage(Integer id, Integer edId, LanguageDto languageDto) throws EntityNotFoundException {
+    public PersonResponseDto updateLanguage(Integer id, Integer edId, LanguageDto languageDto) throws EntityNotFoundException {
         personService.getPerson(id);
         Language education = getLanguageById(edId);
         Language mappedLanguage = mapper.map(languageDto, Language.class);
         mappedLanguage.setPerson(education.getPerson());
-        Language savedLanguage = languageRepository.save(mappedLanguage);
-        return mapper.map(savedLanguage, LanguageDto.class);
+        languageRepository.save(mappedLanguage);
+
+        PersonResponseDto updatedPerson = personService.getPerson(id);
+        return updatedPerson;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.portfolio.service.impl;
 
 import com.portfolio.dto.EducationDto;
-import com.portfolio.dto.PersonDto;
+import com.portfolio.dto.PersonResponseDto;
 import com.portfolio.exception.EntityNotFoundException;
 import com.portfolio.exception.InvalidRequestException;
 import com.portfolio.model.Education;
@@ -37,24 +37,26 @@ public class EducationService implements IEducationService {
     }
 
     @Override
-    public EducationDto addEducation(Integer id, EducationDto educationDto) throws EntityNotFoundException {
-        PersonDto personDto = personService.getPerson(id);
+    public PersonResponseDto addEducation(Integer id, EducationDto educationDto) throws EntityNotFoundException {
+        PersonResponseDto personResponseDto = personService.getPerson(id);
         Education education = mapper.map(educationDto, Education.class);
-        Person person = mapper.map(personDto, Person.class);
-        education.setPerson(person);
+        education.setPerson(mapper.map(personResponseDto, Person.class));
+        educationRepository.save(education);
 
-        Education savedEducation = educationRepository.save(education);
-        return mapper.map(savedEducation, EducationDto.class);
+        PersonResponseDto updatedPerson = personService.getPerson(id);
+        return updatedPerson;
     }
 
     @Override
-    public EducationDto updateEducation(Integer id, Integer edId, EducationDto educationDto) throws EntityNotFoundException {
+    public PersonResponseDto updateEducation(Integer id, Integer edId, EducationDto educationDto) throws EntityNotFoundException {
         personService.getPerson(id);
         Education education = getEducationById(edId);
         Education mappedEducation = mapper.map(educationDto, Education.class);
         mappedEducation.setPerson(education.getPerson());
-        Education savedEducation = educationRepository.save(mappedEducation);
-        return mapper.map(savedEducation, EducationDto.class);
+        educationRepository.save(mappedEducation);
+
+        PersonResponseDto updatedPerson = personService.getPerson(id);
+        return updatedPerson;
     }
 
     @Override

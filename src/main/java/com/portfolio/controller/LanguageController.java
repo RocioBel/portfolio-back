@@ -1,6 +1,7 @@
 package com.portfolio.controller;
 
 import com.portfolio.dto.LanguageDto;
+import com.portfolio.dto.PersonResponseDto;
 import com.portfolio.exception.EntityNotFoundException;
 import com.portfolio.exception.InvalidRequestException;
 import com.portfolio.service.ILanguageService;
@@ -28,22 +29,22 @@ public class LanguageController {
 
     @Operation(summary = "Create a new language")
     @PostMapping("/person/{id}/language")
-    public ResponseEntity<LanguageDto> addLanguage(@RequestBody LanguageDto language,
-                                                     @Parameter(description = "id of person")
+    public ResponseEntity<PersonResponseDto> addLanguage(@RequestBody LanguageDto language,
+                                                         @Parameter(description = "id of person")
                                                      @PathVariable Integer id) throws EntityNotFoundException {
-        LanguageDto savedLanguage = languageService.addLanguage(id, language);
-        return ResponseEntity.ok(savedLanguage);
+        PersonResponseDto person = languageService.addLanguage(id, language);
+        return ResponseEntity.ok(person);
     }
 
     @Operation(summary = "Update a language")
     @PutMapping("/person/{id}/language/{langId}")
-    public ResponseEntity<LanguageDto> updateLanguage(@RequestBody LanguageDto language,
-                                                        @Parameter(description = "id of person")
+    public ResponseEntity<PersonResponseDto> updateLanguage(@RequestBody LanguageDto language,
+                                                            @Parameter(description = "id of person")
                                                         @PathVariable Integer id,
-                                                        @Parameter(description = "id of language to be updated")
+                                                            @Parameter(description = "id of language to be updated")
                                                         @PathVariable Integer langId) throws EntityNotFoundException {
-        LanguageDto updatedLanguage = languageService.updateLanguage(id, langId, language);
-        return ResponseEntity.ok(updatedLanguage);
+        PersonResponseDto person = languageService.updateLanguage(id, langId, language);
+        return ResponseEntity.ok(person);
     }
 
     @Operation(summary = "Delete a language")

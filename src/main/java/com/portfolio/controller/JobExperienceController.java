@@ -1,6 +1,7 @@
 package com.portfolio.controller;
 
 import com.portfolio.dto.JobExperienceDto;
+import com.portfolio.dto.PersonResponseDto;
 import com.portfolio.exception.EntityNotFoundException;
 import com.portfolio.exception.InvalidRequestException;
 import com.portfolio.service.IJobExperienceService;
@@ -28,22 +29,22 @@ public class JobExperienceController {
 
     @Operation(summary = "Create a new job experience")
     @PostMapping("/person/{id}/experience")
-    public ResponseEntity<JobExperienceDto> addExperience(@RequestBody JobExperienceDto experience,
-                                                          @Parameter(description = "id of person")
+    public ResponseEntity<PersonResponseDto> addExperience(@RequestBody JobExperienceDto experience,
+                                                           @Parameter(description = "id of person")
                                                           @PathVariable Integer id) throws EntityNotFoundException {
-        JobExperienceDto savedExperience = jobExperienceService.addExperience(id, experience);
-        return ResponseEntity.ok(savedExperience);
+        PersonResponseDto person = jobExperienceService.addExperience(id, experience);
+        return ResponseEntity.ok(person);
     }
 
     @Operation(summary = "Update a job experience")
     @PutMapping("/person/{id}/experience/{jobId}")
-    public ResponseEntity<JobExperienceDto> updateExperience(@RequestBody JobExperienceDto experience,
-                                                             @Parameter(description = "id of person")
+    public ResponseEntity<PersonResponseDto> updateExperience(@RequestBody JobExperienceDto experience,
+                                                              @Parameter(description = "id of person")
                                                              @PathVariable Integer id,
-                                                             @Parameter(description = "id of job experience to be updated")
+                                                              @Parameter(description = "id of job experience to be updated")
                                                              @PathVariable Integer jobId) throws EntityNotFoundException {
-        JobExperienceDto updatedExperience = jobExperienceService.updateExperience(id, jobId, experience);
-        return ResponseEntity.ok(updatedExperience);
+        PersonResponseDto person = jobExperienceService.updateExperience(id, jobId, experience);
+        return ResponseEntity.ok(person);
     }
 
     @Operation(summary = "Delete a job experience")
