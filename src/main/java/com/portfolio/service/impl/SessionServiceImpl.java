@@ -1,7 +1,6 @@
 package com.portfolio.service.impl;
 
 import com.portfolio.exception.AccountAlreadyExistsException;
-import com.portfolio.exception.IncorrectLoginException;
 import com.portfolio.model.Role;
 import com.portfolio.repository.AccountRepository;
 import com.portfolio.security.JwtService;
@@ -15,9 +14,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.io.UnsupportedEncodingException;
-
-
 @Service
 @RequiredArgsConstructor
 public class SessionServiceImpl implements ISessionService {
@@ -30,7 +26,7 @@ public class SessionServiceImpl implements ISessionService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public AccountResponseDTO login(AuthenticateRequestDto request) throws IncorrectLoginException, UnsupportedEncodingException {
+    public AccountResponseDTO login(AuthenticateRequestDto request) {
 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 request.getUsername(),

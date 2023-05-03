@@ -43,12 +43,6 @@ public class ExceptionController {
         return ResponseEntity.badRequest().body(error);
     }
 
-    @ExceptionHandler(ExpiredJwtException.class)
-    public ResponseEntity<ErrorDto> handleExpiredJwtException(ExpiredJwtException e){
-        ErrorDto error = ErrorDto.builder().code(HttpStatus.BAD_REQUEST.value()).description(e.getMessage()).build();
-        return ResponseEntity.badRequest().body(error);
-    }
-
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDto> handleException(Exception e){
         ErrorDto error = ErrorDto.builder().code(HttpStatus.INTERNAL_SERVER_ERROR.value()).description(e.getMessage()).build();
