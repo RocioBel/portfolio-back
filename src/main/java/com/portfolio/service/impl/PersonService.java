@@ -1,11 +1,11 @@
-package com.portfolio.service;
+package com.portfolio.service.impl;
 
-import com.portfolio.dto.PersonRequest;
-import com.portfolio.dto.PersonResponse;
+import com.portfolio.dto.PersonDto;
 import com.portfolio.exception.EntityNotFoundException;
 import com.portfolio.model.Person;
 import com.portfolio.repository.IJobExperienceRepository;
 import com.portfolio.repository.IPersonRepository;
+import com.portfolio.service.IPersonService;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class PersonService implements  IPersonService {
+public class PersonService implements IPersonService {
     @Autowired
     IPersonRepository personRepository;
 
@@ -26,16 +26,16 @@ public class PersonService implements  IPersonService {
     ModelMapper mapper = new ModelMapper();
 
     @Override
-    public List<PersonResponse> getPeople() {
+    public List<PersonDto> getPeople() {
         List<Person> result = personRepository.findAll();
-        return result.stream().map(p -> mapper.map(p, PersonResponse.class)).collect(Collectors.toList());
+        return result.stream().map(p -> mapper.map(p, PersonDto.class)).collect(Collectors.toList());
     }
 
     @Override
-    public PersonResponse savePerson(PersonRequest person) {
+    public PersonDto savePerson(PersonDto person) {
         Person mappedPerson = mapper.map(person, Person.class);
         Person result = personRepository.save(mappedPerson);
-        return mapper.map(result, PersonResponse.class);
+        return mapper.map(result, PersonDto.class);
     }
 
     @Override
@@ -46,25 +46,25 @@ public class PersonService implements  IPersonService {
 
     @Override
     @Transactional
-    public PersonResponse getPerson(Integer id) throws EntityNotFoundException {
-        return getPersonById(id);
+    public PersonDto getPerson(Integer id) throws EntityNotFoundException {
+        return mapper.map(getPersonById(id), PersonDto.class);
     }
 
     @Override
-    public PersonResponse updatePerson(Integer id, PersonRequest person) throws EntityNotFoundException {
+    public PersonDto updatePerson(Integer id, PersonDto person) throws EntityNotFoundException {
         getPersonById(id);
         Person mappedPerson = mapper.map(person, Person.class);
         Person result = personRepository.save(mappedPerson);
-        return mapper.map(result, PersonResponse.class);
+        return mapper.map(result, PersonDto.class);
     }
 
-    private PersonResponse getPersonById(Integer id) throws EntityNotFoundException {
+    private Person getPersonById(Integer id) throws EntityNotFoundException {
         Optional<Person> finded = personRepository.findById(id);
         if(finded.isEmpty()){
             throw new EntityNotFoundException("Person with id " + id + " doesn't exist.");
         }
 
-        return mapper.map(finded.get(), PersonResponse.class);
+        return finded.get();
     }
 
 }

@@ -11,34 +11,28 @@ import java.time.LocalDate;
 @Data
 @Entity
 @ToString
-@Table(name = "experiencia")
+@Table(name = "estudio")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class JobExperience {
+public class Education {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer experienceId;
-    @Column(name = "puesto")
-    private String jobTitle;
-    @Column(name = "empresa")
-    private String company;
+    private Integer educationId;
+    @Column(name = "titulo")
+    private String titleName;
+    @Column(name = "instituto")
+    private String institute;
+    @Column(name = "logo")
+    private String logo;
     @Column(name = "es_actual")
     private Boolean isActual;
     @Column(name = "fecha_inicio")
     private LocalDate startDate;
     @Column(name = "fecha_fin")
     private LocalDate endDate;
-    @Column(name = "descripcion")
-    private String description;
-    @Column(name = "logo")
-    private String logo;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "persona_id")
     @JsonBackReference
     private Person person;
-    @ManyToOne
-    @JoinColumn(name = "tipo_id")
-    private JobType type;
-
 
 }

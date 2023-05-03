@@ -1,4 +1,4 @@
-package com.portfolio.model;
+package com.portfolio.dto;
 
 import lombok.Builder;
 import lombok.Data;

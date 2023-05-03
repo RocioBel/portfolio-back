@@ -6,39 +6,27 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
 
-import java.time.LocalDate;
-
 @Data
 @Entity
 @ToString
-@Table(name = "experiencia")
+@Table(name = "proyecto")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class JobExperience {
+public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer experienceId;
-    @Column(name = "puesto")
-    private String jobTitle;
-    @Column(name = "empresa")
-    private String company;
-    @Column(name = "es_actual")
-    private Boolean isActual;
-    @Column(name = "fecha_inicio")
-    private LocalDate startDate;
-    @Column(name = "fecha_fin")
-    private LocalDate endDate;
+    private Integer projectId;
+    @Column(name = "nombre")
+    private String name;
     @Column(name = "descripcion")
     private String description;
-    @Column(name = "logo")
-    private String logo;
+    @Column(name = "github")
+    private String github;
+    @Column(name = "url")
+    private String url;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "persona_id")
     @JsonBackReference
     private Person person;
-    @ManyToOne
-    @JoinColumn(name = "tipo_id")
-    private JobType type;
-
 
 }
