@@ -2,7 +2,7 @@ package com.portfolio.service.impl;
 
 import com.portfolio.exception.AccountAlreadyExistsException;
 import com.portfolio.model.Role;
-import com.portfolio.repository.AccountRepository;
+import com.portfolio.repository.IAccountRepository;
 import com.portfolio.security.JwtService;
 import com.portfolio.dto.AuthenticateRequestDto;
 import com.portfolio.dto.AccountResponseDTO;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class SessionServiceImpl implements ISessionService {
-    private final AccountRepository accountRepository;
+    private final IAccountRepository accountRepository;
 
     private final AuthenticationManager authenticationManager;
 

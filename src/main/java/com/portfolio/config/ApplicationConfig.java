@@ -1,7 +1,7 @@
 package com.portfolio.config;
 
-import com.portfolio.repository.AccountRepository;
-import lombok.RequiredArgsConstructor;
+import com.portfolio.repository.IAccountRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,10 +14,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-@RequiredArgsConstructor
 public class ApplicationConfig {
 
-    private final AccountRepository accountRepository;
+    @Autowired
+    IAccountRepository accountRepository;
 
     @Bean
     public UserDetailsService userDetailsService() {
