@@ -1,6 +1,7 @@
 package com.portfolio.controller;
 
 import com.portfolio.dto.EducationDto;
+import com.portfolio.dto.PersonResponseDto;
 import com.portfolio.exception.EntityNotFoundException;
 import com.portfolio.exception.InvalidRequestException;
 import com.portfolio.service.IEducationService;
@@ -28,22 +29,22 @@ public class EducationController {
 
     @Operation(summary = "Create a new education")
     @PostMapping("/person/{id}/education")
-    public ResponseEntity<EducationDto> addEducation(@RequestBody EducationDto education,
-                                                     @Parameter(description = "id of person")
+    public ResponseEntity<PersonResponseDto> addEducation(@RequestBody EducationDto education,
+                                                          @Parameter(description = "id of person")
                                                      @PathVariable Integer id) throws EntityNotFoundException {
-        EducationDto savedEducation = educationService.addEducation(id, education);
-        return ResponseEntity.ok(savedEducation);
+        PersonResponseDto person = educationService.addEducation(id, education);
+        return ResponseEntity.ok(person);
     }
 
     @Operation(summary = "Update an education")
     @PutMapping("/person/{id}/education/{edId}")
-    public ResponseEntity<EducationDto> updateEducation(@RequestBody EducationDto education,
-                                                        @Parameter(description = "id of person")
+    public ResponseEntity<PersonResponseDto> updateEducation(@RequestBody EducationDto education,
+                                                             @Parameter(description = "id of person")
                                                         @PathVariable Integer id,
-                                                        @Parameter(description = "id of education to be updated")
+                                                             @Parameter(description = "id of education to be updated")
                                                         @PathVariable Integer edId) throws EntityNotFoundException {
-        EducationDto updatedEducation = educationService.updateEducation(id, edId, education);
-        return ResponseEntity.ok(updatedEducation);
+        PersonResponseDto person = educationService.updateEducation(id, edId, education);
+        return ResponseEntity.ok(person);
     }
 
     @Operation(summary = "Delete an education")
