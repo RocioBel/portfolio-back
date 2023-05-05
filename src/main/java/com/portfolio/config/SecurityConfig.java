@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 
-        return http.build();
+        return http.getOrBuild();
     }
 
 
