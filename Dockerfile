@@ -1,4 +1,4 @@
 FROM amazoncorretto:17
 MAINTAINER rovargas
-COPY out/artifacts/demo_jar/demo.jar demo.jar
+COPY target/demo-0.0.1-SNAPSHOT.jar demo.jar
 ENTRYPOINT ["java","-jar","/demo.jar"]
