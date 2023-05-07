@@ -1,4 +1,5 @@
-FROM corretto:17
-MAINTAINER rovargas
-COPY out/artifacts/demo_jar/demo.jar demo.jar
-ENTRYPOINT ["java","-jar","/demo.jar"]
+FROM amazoncorretto:17
+VOLUME /tmp
+COPY target/*.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
+EXPOSE 8080
