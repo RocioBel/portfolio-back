@@ -2,13 +2,13 @@
 
 Aplicación construída en Spring Boot para el proyecto final de Argentina Programa.
 
-##Tecnologías utilizadas
+## Tecnologías utilizadas
 - Java 17
 - Spring Boot
 - MySQL
 
 
-##Uso
+## Uso
 
 ### Swagger
 Para acceder al swagger, hay que dirigirse a '/swagger-ui.html'
