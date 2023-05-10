@@ -1,6 +1,6 @@
 package com.portfolio.service.impl;
 
-import com.portfolio.dto.PersonResponseDto;
+import com.portfolio.dto.PersonDto;
 import com.portfolio.dto.SkillDto;
 import com.portfolio.exception.EntityNotFoundException;
 import com.portfolio.exception.InvalidRequestException;
@@ -33,27 +33,27 @@ public class SkillService implements ISkillService {
     }
 
     @Override
-    public PersonResponseDto addSkill(Integer id, SkillDto skillDto) throws EntityNotFoundException {
-        PersonResponseDto personResponseDto = personService.getPerson(id);
+    public PersonDto addSkill(Integer id, SkillDto skillDto) throws EntityNotFoundException {
+        PersonDto personDto = personService.getPerson(id);
         Skill skill = mapper.map(skillDto, Skill.class);
-        Person person = mapper.map(personResponseDto, Person.class);
+        Person person = mapper.map(personDto, Person.class);
         skill.setPerson(person);
 
         skillRepository.save(skill);
 
-        PersonResponseDto updatedPerson = personService.getPerson(id);
+        PersonDto updatedPerson = personService.getPerson(id);
         return updatedPerson;
     }
 
     @Override
-    public PersonResponseDto updateSkill(Integer id, Integer skillId, SkillDto skillDto) throws EntityNotFoundException {
+    public PersonDto updateSkill(Integer id, Integer skillId, SkillDto skillDto) throws EntityNotFoundException {
         personService.getPerson(id);
         Skill skill = getSkillById(skillId);
         Skill mappedSkill = mapper.map(skillDto, Skill.class);
         mappedSkill.setPerson(skill.getPerson());
         skillRepository.save(mappedSkill);
 
-        PersonResponseDto updatedPerson = personService.getPerson(id);
+        PersonDto updatedPerson = personService.getPerson(id);
         return updatedPerson;
     }
 

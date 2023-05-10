@@ -1,7 +1,7 @@
 package com.portfolio.service.impl;
 
 import com.portfolio.dto.EducationDto;
-import com.portfolio.dto.PersonResponseDto;
+import com.portfolio.dto.PersonDto;
 import com.portfolio.exception.EntityNotFoundException;
 import com.portfolio.exception.InvalidRequestException;
 import com.portfolio.model.Education;
@@ -37,25 +37,25 @@ public class EducationService implements IEducationService {
     }
 
     @Override
-    public PersonResponseDto addEducation(Integer id, EducationDto educationDto) throws EntityNotFoundException {
-        PersonResponseDto personResponseDto = personService.getPerson(id);
+    public PersonDto addEducation(Integer id, EducationDto educationDto) throws EntityNotFoundException {
+        PersonDto personDto = personService.getPerson(id);
         Education education = mapper.map(educationDto, Education.class);
-        education.setPerson(mapper.map(personResponseDto, Person.class));
+        education.setPerson(mapper.map(personDto, Person.class));
         educationRepository.save(education);
 
-        PersonResponseDto updatedPerson = personService.getPerson(id);
+        PersonDto updatedPerson = personService.getPerson(id);
         return updatedPerson;
     }
 
     @Override
-    public PersonResponseDto updateEducation(Integer id, Integer edId, EducationDto educationDto) throws EntityNotFoundException {
+    public PersonDto updateEducation(Integer id, Integer edId, EducationDto educationDto) throws EntityNotFoundException {
         personService.getPerson(id);
         Education education = getEducationById(edId);
         Education mappedEducation = mapper.map(educationDto, Education.class);
         mappedEducation.setPerson(education.getPerson());
         educationRepository.save(mappedEducation);
 
-        PersonResponseDto updatedPerson = personService.getPerson(id);
+        PersonDto updatedPerson = personService.getPerson(id);
         return updatedPerson;
     }
 

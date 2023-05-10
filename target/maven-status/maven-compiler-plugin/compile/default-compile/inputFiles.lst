@@ -25,6 +25,7 @@ C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portf
 C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\exception\EntityAlreadyExistsException.java
 C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\service\ISkillService.java
 C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\dto\ErrorDto.java
+C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\dto\PersonDto.java
 C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\service\IPersonService.java
 C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\dto\JobExperienceDto.java
 C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\exception\EntityNotFoundException.java
@@ -38,7 +39,6 @@ C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portf
 C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\security\JwtService.java
 C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\security\JWTAuthorizationFilter.java
 C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\repository\IJobExperienceRepository.java
-C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\dto\PersonRequestDto.java
 C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\dto\SkillDto.java
 C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\dto\ProjectDto.java
 C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\exception\IncorrectLoginException.java
@@ -48,7 +48,6 @@ C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portf
 C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\dto\LanguageDto.java
 C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\model\Skill.java
 C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\model\Account.java
-C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\dto\PersonResponseDto.java
 C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\model\Education.java
 C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\repository\AccountRepository.java
 C:\Users\varga\Desktop\Argentina programa\portfolio-back\src\main\java\com\portfolio\repository\ISkillRepository.java

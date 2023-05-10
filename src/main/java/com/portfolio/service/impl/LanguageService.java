@@ -1,7 +1,7 @@
 package com.portfolio.service.impl;
 
 import com.portfolio.dto.LanguageDto;
-import com.portfolio.dto.PersonResponseDto;
+import com.portfolio.dto.PersonDto;
 import com.portfolio.exception.EntityNotFoundException;
 import com.portfolio.exception.InvalidRequestException;
 import com.portfolio.model.Language;
@@ -33,27 +33,27 @@ public class LanguageService implements ILanguageService {
     }
 
     @Override
-    public PersonResponseDto addLanguage(Integer id, LanguageDto languageDto) throws EntityNotFoundException {
-        PersonResponseDto personResponseDto = personService.getPerson(id);
+    public PersonDto addLanguage(Integer id, LanguageDto languageDto) throws EntityNotFoundException {
+        PersonDto personDto = personService.getPerson(id);
         Language language = mapper.map(languageDto, Language.class);
-        Person person = mapper.map(personResponseDto, Person.class);
+        Person person = mapper.map(personDto, Person.class);
         language.setPerson(person);
 
         languageRepository.save(language);
 
-        PersonResponseDto updatedPerson = personService.getPerson(id);
+        PersonDto updatedPerson = personService.getPerson(id);
         return updatedPerson;
     }
 
     @Override
-    public PersonResponseDto updateLanguage(Integer id, Integer edId, LanguageDto languageDto) throws EntityNotFoundException {
+    public PersonDto updateLanguage(Integer id, Integer edId, LanguageDto languageDto) throws EntityNotFoundException {
         personService.getPerson(id);
         Language education = getLanguageById(edId);
         Language mappedLanguage = mapper.map(languageDto, Language.class);
         mappedLanguage.setPerson(education.getPerson());
         languageRepository.save(mappedLanguage);
 
-        PersonResponseDto updatedPerson = personService.getPerson(id);
+        PersonDto updatedPerson = personService.getPerson(id);
         return updatedPerson;
     }
 

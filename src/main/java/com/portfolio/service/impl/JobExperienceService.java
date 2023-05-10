@@ -1,7 +1,7 @@
 package com.portfolio.service.impl;
 
 import com.portfolio.dto.JobExperienceDto;
-import com.portfolio.dto.PersonResponseDto;
+import com.portfolio.dto.PersonDto;
 import com.portfolio.exception.EntityNotFoundException;
 import com.portfolio.exception.InvalidRequestException;
 import com.portfolio.model.JobExperience;
@@ -38,8 +38,8 @@ public class JobExperienceService implements IJobExperienceService {
     }
 
     @Override
-    public PersonResponseDto addExperience(Integer id, JobExperienceDto workDto) throws EntityNotFoundException {
-        PersonResponseDto person = personService.getPerson(id);
+    public PersonDto addExperience(Integer id, JobExperienceDto workDto) throws EntityNotFoundException {
+        PersonDto person = personService.getPerson(id);
         JobExperience work = mapper.map(workDto, JobExperience.class);
         work.setPerson(mapper.map(person, Person.class));
 
@@ -48,25 +48,25 @@ public class JobExperienceService implements IJobExperienceService {
 
         jobExperienceRepository.save(work);
 
-        PersonResponseDto updatedPerson = personService.getPerson(id);
+        PersonDto updatedPerson = personService.getPerson(id);
         return updatedPerson;
     }
 
     @Override
-    public PersonResponseDto updateExperience(Integer id, Integer expId, JobExperienceDto updatedJob) throws EntityNotFoundException {
+    public PersonDto updateExperience(Integer id, Integer expId, JobExperienceDto updatedJob) throws EntityNotFoundException {
         personService.getPerson(id);
         JobExperience jobExperience = getExperienceById(expId);
         JobExperience mapppedExperience = mapper.map(updatedJob, JobExperience.class);
         mapppedExperience.setPerson(jobExperience.getPerson());
         jobExperienceRepository.save(mapppedExperience);
 
-        PersonResponseDto updatedPerson = personService.getPerson(id);
+        PersonDto updatedPerson = personService.getPerson(id);
         return updatedPerson;
     }
 
     @Override
     public void deleteExperience(Integer id, Integer expId) throws EntityNotFoundException, InvalidRequestException {
-        PersonResponseDto person = personService.getPerson(id);
+        PersonDto person = personService.getPerson(id);
         boolean found = person.getExperiences().stream().anyMatch(e -> e.getExperienceId() == expId);
         if (!found) {
             throw new InvalidRequestException("The experience doesn't belong to the person");

@@ -1,10 +1,8 @@
 package com.portfolio.service.impl;
 
-import com.portfolio.dto.PersonRequestDto;
-import com.portfolio.dto.PersonResponseDto;
+import com.portfolio.dto.PersonDto;
 import com.portfolio.exception.EntityNotFoundException;
 import com.portfolio.model.Person;
-import com.portfolio.repository.IJobExperienceRepository;
 import com.portfolio.repository.IPersonRepository;
 import com.portfolio.service.IPersonService;
 import jakarta.transaction.Transactional;
@@ -21,22 +19,19 @@ public class PersonService implements IPersonService {
     @Autowired
     IPersonRepository personRepository;
 
-    @Autowired
-    IJobExperienceRepository jobExperienceRepository;
-
     ModelMapper mapper = new ModelMapper();
 
     @Override
-    public List<PersonResponseDto> getPeople() {
+    public List<PersonDto> getPeople() {
         List<Person> result = personRepository.findAll();
-        return result.stream().map(p -> mapper.map(p, PersonResponseDto.class)).collect(Collectors.toList());
+        return result.stream().map(p -> mapper.map(p, PersonDto.class)).collect(Collectors.toList());
     }
 
     @Override
-    public PersonResponseDto savePerson(PersonRequestDto person) {
+    public PersonDto savePerson(PersonDto person) {
         Person mappedPerson = mapper.map(person, Person.class);
         Person result = personRepository.save(mappedPerson);
-        return mapper.map(result, PersonResponseDto.class);
+        return mapper.map(result, PersonDto.class);
     }
 
     @Override
@@ -47,26 +42,18 @@ public class PersonService implements IPersonService {
 
     @Override
     @Transactional
-    public PersonResponseDto getPerson(Integer id) throws EntityNotFoundException {
-        return mapper.map(getPersonById(id), PersonResponseDto.class);
+    public PersonDto getPerson(Integer id) throws EntityNotFoundException {
+        return mapper.map(getPersonById(id), PersonDto.class);
     }
 
     @Override
-    public PersonResponseDto updatePerson(Integer id, PersonRequestDto personRequest) throws EntityNotFoundException {
-        Person person = getPersonById(id);
+    public PersonDto updatePerson(Integer id, PersonDto personRequest) throws EntityNotFoundException {
+        getPersonById(id);
 
-        person.setFirstName(personRequest.getFirstName());
-        person.setLastName(personRequest.getLastName());
-        person.setBirthday(personRequest.getBirthday());
-        person.setAboutMe(personRequest.getAboutMe());
-        person.setEmail(personRequest.getEmail());
-        person.setLinkedin(personRequest.getLinkedin());
-        person.setPhone(personRequest.getPhone());
-        person.setPhoto(personRequest.getTitle());
-        person.setTitle(personRequest.getTitle());
+        Person personToSave = mapper.map(personRequest, Person.class);
 
-        Person result = personRepository.save(person);
-        return mapper.map(result, PersonResponseDto.class);
+        Person result = personRepository.save(personToSave);
+        return mapper.map(result, PersonDto.class);
     }
 
     private Person getPersonById(Integer id) throws EntityNotFoundException {

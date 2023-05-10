@@ -1,6 +1,6 @@
 package com.portfolio.service.impl;
 
-import com.portfolio.dto.PersonResponseDto;
+import com.portfolio.dto.PersonDto;
 import com.portfolio.dto.ProjectDto;
 import com.portfolio.exception.EntityNotFoundException;
 import com.portfolio.exception.InvalidRequestException;
@@ -33,27 +33,27 @@ public class ProjectService implements IProjectService {
     }
 
     @Override
-    public PersonResponseDto addProject(Integer id, ProjectDto projectDto) throws EntityNotFoundException {
-        PersonResponseDto personResponseDto = personService.getPerson(id);
+    public PersonDto addProject(Integer id, ProjectDto projectDto) throws EntityNotFoundException {
+        PersonDto personDto = personService.getPerson(id);
         Project project = mapper.map(projectDto, Project.class);
-        Person person = mapper.map(personResponseDto, Person.class);
+        Person person = mapper.map(personDto, Person.class);
         project.setPerson(person);
 
         projectRepository.save(project);
 
-        PersonResponseDto updatedPerson = personService.getPerson(id);
+        PersonDto updatedPerson = personService.getPerson(id);
         return updatedPerson;
     }
 
     @Override
-    public PersonResponseDto updateProject(Integer id, Integer edId, ProjectDto projectDto) throws EntityNotFoundException {
+    public PersonDto updateProject(Integer id, Integer edId, ProjectDto projectDto) throws EntityNotFoundException {
         personService.getPerson(id);
         Project project = getProjectById(edId);
         Project mappedProject = mapper.map(projectDto, Project.class);
         mappedProject.setPerson(project.getPerson());
         projectRepository.save(mappedProject);
 
-        PersonResponseDto updatedPerson = personService.getPerson(id);
+        PersonDto updatedPerson = personService.getPerson(id);
         return updatedPerson;
     }
 
