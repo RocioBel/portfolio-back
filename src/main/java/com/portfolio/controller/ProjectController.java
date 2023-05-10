@@ -1,6 +1,6 @@
 package com.portfolio.controller;
 
-import com.portfolio.dto.PersonResponseDto;
+import com.portfolio.dto.PersonDto;
 import com.portfolio.dto.ProjectDto;
 import com.portfolio.exception.EntityNotFoundException;
 import com.portfolio.exception.InvalidRequestException;
@@ -29,21 +29,21 @@ public class ProjectController {
 
     @Operation(summary = "Create a new project")
     @PostMapping("/person/{id}/project")
-    public ResponseEntity<PersonResponseDto> addProject(@RequestBody ProjectDto project,
-                                                        @Parameter(description = "id of person")
+    public ResponseEntity<PersonDto> addProject(@RequestBody ProjectDto project,
+                                                @Parameter(description = "id of person")
                                                  @PathVariable Integer id) throws EntityNotFoundException {
-        PersonResponseDto person = projectService.addProject(id, project);
+        PersonDto person = projectService.addProject(id, project);
         return ResponseEntity.ok(person);
     }
 
     @Operation(summary = "Update a project")
     @PutMapping("/person/{id}/project/{projectId}")
-    public ResponseEntity<PersonResponseDto> updateProject(@RequestBody ProjectDto project,
-                                                           @Parameter(description = "id of person")
+    public ResponseEntity<PersonDto> updateProject(@RequestBody ProjectDto project,
+                                                   @Parameter(description = "id of person")
                                                     @PathVariable Integer id,
-                                                           @Parameter(description = "id of project to be updated")
+                                                   @Parameter(description = "id of project to be updated")
                                                     @PathVariable Integer projectId) throws EntityNotFoundException {
-        PersonResponseDto person = projectService.updateProject(id, projectId, project);
+        PersonDto person = projectService.updateProject(id, projectId, project);
         return ResponseEntity.ok(person);
     }
 

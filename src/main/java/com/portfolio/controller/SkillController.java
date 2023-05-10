@@ -1,6 +1,6 @@
 package com.portfolio.controller;
 
-import com.portfolio.dto.PersonResponseDto;
+import com.portfolio.dto.PersonDto;
 import com.portfolio.dto.SkillDto;
 import com.portfolio.exception.EntityNotFoundException;
 import com.portfolio.exception.InvalidRequestException;
@@ -29,21 +29,21 @@ public class SkillController {
 
     @Operation(summary = "Create a new skill")
     @PostMapping("/person/{id}/skill")
-    public ResponseEntity<PersonResponseDto> addSkill(@RequestBody SkillDto skill,
-                                                      @Parameter(description = "id of person")
+    public ResponseEntity<PersonDto> addSkill(@RequestBody SkillDto skill,
+                                              @Parameter(description = "id of person")
                                                      @PathVariable Integer id) throws EntityNotFoundException {
-        PersonResponseDto person = skillService.addSkill(id, skill);
+        PersonDto person = skillService.addSkill(id, skill);
         return ResponseEntity.ok(person);
     }
 
     @Operation(summary = "Update a skill")
     @PutMapping("/person/{id}/skill/{skillId}")
-    public ResponseEntity<PersonResponseDto> updateSkill(@RequestBody SkillDto skill,
-                                                         @Parameter(description = "id of person")
+    public ResponseEntity<PersonDto> updateSkill(@RequestBody SkillDto skill,
+                                                 @Parameter(description = "id of person")
                                                         @PathVariable Integer id,
-                                                         @Parameter(description = "id of skill to be updated")
+                                                 @Parameter(description = "id of skill to be updated")
                                                         @PathVariable Integer skillId) throws EntityNotFoundException {
-        PersonResponseDto person = skillService.updateSkill(id, skillId, skill);
+        PersonDto person = skillService.updateSkill(id, skillId, skill);
         return ResponseEntity.ok(person);
     }
 

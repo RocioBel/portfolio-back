@@ -4,7 +4,6 @@ com\portfolio\model\JobExperience.class
 com\portfolio\model\Education.class
 com\portfolio\controller\SessionController.class
 com\portfolio\dto\ErrorDto$ErrorDtoBuilder.class
-com\portfolio\dto\PersonResponseDto.class
 com\portfolio\service\IJobExperienceService.class
 com\portfolio\controller\LanguageController.class
 com\portfolio\controller\EducationController.class
@@ -29,11 +28,11 @@ com\portfolio\service\impl\PersonService.class
 com\portfolio\dto\ProjectDto.class
 com\portfolio\repository\IProjectRepository.class
 com\portfolio\service\IProjectService.class
-com\portfolio\dto\PersonRequestDto.class
 com\portfolio\service\ISessionService.class
 com\portfolio\dto\AuthenticateRequestDto.class
 com\portfolio\dto\AccountResponseDTO$AccountResponseDTOBuilder.class
 com\portfolio\dto\LanguageDto.class
+com\portfolio\dto\PersonDto.class
 com\portfolio\service\impl\EducationService.class
 com\portfolio\exception\NotFoundException.class
 com\portfolio\service\ILanguageService.class
