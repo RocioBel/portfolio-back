@@ -48,9 +48,14 @@ public class PersonService implements IPersonService {
 
     @Override
     public PersonDto updatePerson(Integer id, PersonDto personRequest) throws EntityNotFoundException {
-        getPersonById(id);
+        Person savedPerson = getPersonById(id);
 
         Person personToSave = mapper.map(personRequest, Person.class);
+        personToSave.setExperiences(savedPerson.getExperiences());
+        personToSave.setEducation(savedPerson.getEducation());
+        personToSave.setSkills(savedPerson.getSkills());
+        personToSave.setLanguages(savedPerson.getLanguages());
+        personToSave.setProjects(savedPerson.getProjects());
 
         Person result = personRepository.save(personToSave);
         return mapper.map(result, PersonDto.class);
