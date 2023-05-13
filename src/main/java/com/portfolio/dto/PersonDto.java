@@ -1,5 +1,6 @@
 package com.portfolio.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.ToString;
@@ -16,12 +17,14 @@ public class PersonDto {
     private String firstName;
     private String lastName;
     private String title;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
     private String phone;
     private String email;
     private String aboutMe;
     private String photo;
     private String linkedin;
+    private String location;
     private List<JobExperienceDto> experiences = new ArrayList<>();
     private List<EducationDto> education = new ArrayList<>();
     private List<ProjectDto> projects = new ArrayList<>();
