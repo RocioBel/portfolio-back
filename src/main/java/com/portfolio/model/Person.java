@@ -32,6 +32,8 @@ public class Person {
     private String phone;
     @Column(name = "correo")
     private String email;
+    @Column(name = "ubicacion")
+    private String location;
     @Column(name = "sobre_mi")
     private String aboutMe;
     @Column(name = "url_foto")
