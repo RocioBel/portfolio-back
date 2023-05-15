@@ -41,6 +41,7 @@ public class EducationService implements IEducationService {
         PersonDto personDto = personService.getPerson(id);
         Education education = mapper.map(educationDto, Education.class);
         education.setPerson(mapper.map(personDto, Person.class));
+        education.setLogo("assets/universidad.png");
         educationRepository.save(education);
 
         PersonDto updatedPerson = personService.getPerson(id);
