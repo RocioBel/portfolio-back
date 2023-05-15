@@ -40,6 +40,8 @@ public class Person {
     private String photo;
     @Column(name= "url_linkedin")
     private String linkedin;
+    @Column(name= "url_github")
+    private String github;
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL,  fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonManagedReference
     private List<JobExperience> experiences = new ArrayList<>();
