@@ -24,6 +24,7 @@ public class PersonDto {
     private String aboutMe;
     private String photo;
     private String linkedin;
+    private String github;
     private String location;
     private List<JobExperienceDto> experiences = new ArrayList<>();
     private List<EducationDto> education = new ArrayList<>();
