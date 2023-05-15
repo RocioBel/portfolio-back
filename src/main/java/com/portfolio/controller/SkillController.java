@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = {"https://porfolio-web-f29d0.web.app/"})
 public class SkillController {
     @Autowired
     ISkillService skillService;
