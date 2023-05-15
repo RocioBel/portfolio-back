@@ -45,6 +45,7 @@ public class JobExperienceService implements IJobExperienceService {
 
         JobType jobType = jobTypeRepository.findById(workDto.getTypeId()).orElseThrow(()->new EntityNotFoundException("Job type doesn't exist"));
         work.setType(jobType);
+        work.setLogo("assets/empresa.png");
 
         jobExperienceRepository.save(work);
 
