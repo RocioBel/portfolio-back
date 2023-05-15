@@ -7,6 +7,7 @@ import com.portfolio.exception.NotFoundException;
 import com.portfolio.dto.AuthenticateRequestDto;
 import com.portfolio.dto.AccountResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.UnsupportedEncodingException;
 
 @RestController
+@CrossOrigin(origins = {"https://porfolio-web-f29d0.web.app/"})
 public class SessionController {
     @Autowired
     ISessionService service;
