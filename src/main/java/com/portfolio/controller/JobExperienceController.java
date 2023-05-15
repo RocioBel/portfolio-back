@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"https://porfolio-web-f29d0.web.app/"})
+@CrossOrigin(origins = {"https://porfolio-web-f29d0.web.app/", "http://localhost:4200"})
 public class JobExperienceController {
     @Autowired
     IJobExperienceService jobExperienceService;
